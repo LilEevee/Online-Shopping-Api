@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>2cf70f8b-224a-44ac-b54a-ce7a01fa5d5a</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.10" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.4" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Online.Shopping.Application\Online.Shopping.Application.csproj" />
+    <ProjectReference Include="..\Online.Shopping.Infrastructure\Online.Shopping.Infrastructure.csproj" />
+    <ProjectReference Include="..\Online.Shopping.Presentation\Online.Shopping.Presentation.csproj" />
+  </ItemGroup>
+
+</Project>
