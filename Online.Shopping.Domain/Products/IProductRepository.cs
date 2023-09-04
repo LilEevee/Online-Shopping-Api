@@ -4,8 +4,7 @@
     {
         void Add(Product product);
         void Remove(Product product);
-        Task<Product?> GetByIdAsync(int id);
-        Task<Product> GetAllAsync();
+        Task<Product?> GetByIdAsync(ProductId productId);
         void Update(Product product);
     }
 }

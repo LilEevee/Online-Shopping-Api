@@ -39,7 +39,6 @@ namespace Online.Shopping.Persistence
 
                 var result = await base.SaveChangesAsync(cancellationToken);
 
-
                 foreach (var domainEvent in domainEvents)
                 {
                     await _publisher.Publish(domainEvent, cancellationToken);
@@ -49,7 +48,6 @@ namespace Online.Shopping.Persistence
             {
 
             }
-
 
             return 1;
         }

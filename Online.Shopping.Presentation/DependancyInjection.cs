@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Online.Shopping.Application.Abstractions.Data;
 using Online.Shopping.Domain.Products;
-using Online.Shopping.Presentation.Persistence;
+using Online.Shopping.Persistence;
 
 namespace Online.Shopping.Persistence
 {

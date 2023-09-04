@@ -24,28 +24,28 @@ namespace Online.Shopping.Api.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Get(int id)
+        [HttpGet("GetProduct")]
+        public async Task<IActionResult> GetProduct(int id)
         {
             var getProductQueryById = new GetProductQueryById(new ProductId(id));
 
-            await _mediator.Send(getProductQueryById);
+            var product = await _mediator.Send(getProductQueryById);
 
             return Ok();
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Get(string name, int page, int pageSize)
+        [HttpGet("GetProducts")]
+        public async Task<IActionResult> GetProducts(string name, int page, int pageSize)
         {
             var getProductQueryById = new GetProductsQuery(name, page, pageSize);
 
-            await _mediator.Send(getProductQueryById);
+            var products = _mediator.Send(getProductQueryById);
 
             return Ok();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Post([FromBody] CreateProductRequest createProductRequest)
+        [HttpPost("CreateProduct")]
+        public async Task<IActionResult> CreateProduct([FromBody] CreateProductRequest createProductRequest)
         {
             var createProductCommmand = new CreateProductCommand(new ProductId(createProductRequest.ProductId),
                 createProductRequest.Name, createProductRequest.Price, createProductRequest.Sku);
@@ -55,19 +55,19 @@ namespace Online.Shopping.Api.Controllers
             return Ok();
         }
 
-        [HttpPut]
-        public async Task<IActionResult> Put([FromBody] UpdateProductRequest updateProductRequest)
+        [HttpPut("UpdateProduct")]
+        public async Task<IActionResult> UpdateProduct([FromBody] UpdateProductRequest updateProductRequest)
         {
             var updateProductCommand = new UpdateProductCommand(new ProductId(updateProductRequest.ProductId),
                 updateProductRequest.Name, updateProductRequest.Price, updateProductRequest.Sku);
             
-                await _mediator.Send(updateProductRequest);
+                await _mediator.Send(updateProductCommand);
 
             return Ok();
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> Delete(int id)
+        [HttpDelete("DeleteProduct")]
+        public async Task<IActionResult> DeleteProduct(int id)
         {
             var deleteCommand = new DeleteProductCommand(new ProductId(id));
 

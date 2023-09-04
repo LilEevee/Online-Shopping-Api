@@ -17,7 +17,7 @@ namespace Online.Shopping.Application.Products.Delete
 
         public async Task Handle(DeleteProductCommand request, CancellationToken cancellationToken)
         {
-            var product = await _productRepository.GetByIdAsync(request.ProductId.id);
+            var product = await _productRepository.GetByIdAsync(request.ProductId);
 
             if(product == null)
             {
