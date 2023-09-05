@@ -16,9 +16,9 @@ namespace Online.Shopping.Api.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ILogger _logger;
 
-        public ProductController(ILogger<WeatherForecastController> logger, IMediator mediator)
+        public ProductController(ILogger logger, IMediator mediator)
         {
             _mediator = mediator;
             _logger = logger;
@@ -39,7 +39,7 @@ namespace Online.Shopping.Api.Controllers
         {
             var getProductQueryById = new GetProductsQuery(name, page, pageSize);
 
-            var products = _mediator.Send(getProductQueryById);
+            var products = await _mediator.Send(getProductQueryById);
 
             return Ok();
         }

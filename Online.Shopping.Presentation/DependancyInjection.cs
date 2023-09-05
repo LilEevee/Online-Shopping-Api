@@ -2,8 +2,9 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Online.Shopping.Application.Abstractions.Data;
+using Online.Shopping.Domain.Customers;
 using Online.Shopping.Domain.Products;
-using Online.Shopping.Persistence;
+using Online.Shopping.Persistence.Repositories;
 
 namespace Online.Shopping.Persistence
 {
@@ -22,6 +23,7 @@ namespace Online.Shopping.Persistence
                 serviceProvider.GetRequiredService<OnlineShoppingDbContext>());
 
             serviceCollection.AddScoped<IProductRepository, ProductRepository>();
+            serviceCollection.AddScoped<ICustomerRepository, CustomerRepository>();
 
             return serviceCollection;
         }

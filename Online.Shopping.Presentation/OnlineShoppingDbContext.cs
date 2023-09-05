@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Online.Shopping.Application.Abstractions.Data;
 using Online.Shopping.Domain;
+using Online.Shopping.Domain.Customers;
 using Online.Shopping.Domain.Products;
 
 namespace Online.Shopping.Persistence
@@ -22,6 +23,7 @@ namespace Online.Shopping.Persistence
         }
 
         public DbSet<Product> Products { get; set; }
+        public DbSet<Customer> Customers { get; set; }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Online.Shopping.Domain;
 
-namespace Online.Shopping.Persistence
+namespace Online.Shopping.Persistence.Repositories
 {
     internal abstract class Repository<Entity,EntityId> 
         where Entity : Entity<EntityId>

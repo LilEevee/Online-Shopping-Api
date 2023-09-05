@@ -1,6 +1,6 @@
 ﻿using Online.Shopping.Domain.Products;
 
-namespace Online.Shopping.Persistence
+namespace Online.Shopping.Persistence.Repositories
 {
     internal sealed class ProductRepository : Repository<Product, ProductId>, IProductRepository
     {
