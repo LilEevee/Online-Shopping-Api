@@ -32,7 +32,7 @@ namespace Online.Shopping.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateCustomerRequest createCustomerRequest)
         {
-            var createCustomerCommand = new CreateCustomerCommand(new CustomerId(createCustomerRequest.Id), createCustomerRequest.Name, createCustomerRequest.Email);
+            var createCustomerCommand = new CreateCustomerCommand(createCustomerRequest.Name, createCustomerRequest.Email);
 
             await _mediator.Send(createCustomerCommand);
 

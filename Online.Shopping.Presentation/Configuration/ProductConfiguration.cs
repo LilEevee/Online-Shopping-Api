@@ -11,7 +11,7 @@ namespace Online.Shopping.Persistence.Configurations
             builder.HasKey(p => p.Id);
 
             builder.Property(p => p.Id).HasConversion(
-                productId => productId.id,
+                productId => productId.Id,
                 value => new ProductId(value));
         }
     }

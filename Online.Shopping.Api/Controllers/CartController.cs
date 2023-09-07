@@ -1,83 +1,57 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Online.Shopping.Application.Carts.AddLineItem;
+using Online.Shopping.Application.Carts.Create;
+using Online.Shopping.Application.Carts.RemoveLineItem;
+using Online.Shopping.Domain.Carts;
+using Online.Shopping.Domain.Products;
+
+// TODO : FIX ERROR HANDLING
 
 namespace Online.Shopping.Api.Controllers
 {
-    public class CartController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class CartController : ControllerBase
     {
-        // GET: CartController
-        public ActionResult Index()
+        private readonly IMediator _mediator;
+        private readonly ILogger _logger;
+
+        public CartController(ILogger logger, IMediator mediator)
         {
-            return View();
+            _mediator = mediator;
+            _logger = logger;
         }
 
-        // GET: CartController/Details/5
-        public ActionResult Details(int id)
+        [HttpPost("CreateCart")]
+        public async Task<IActionResult> CreateCart(Guid customerId)
         {
-            return View();
+            var createCartCommand = new CreateCartCommand(customerId);
+
+            await _mediator.Send(createCartCommand);
+
+            return Ok();
         }
 
-        // GET: CartController/Create
-        public ActionResult Create()
+        [HttpPut("AddLineItemToCart")]
+        public async Task<IActionResult> AddLineItemToCart([FromBody] AddLineItemRequest addLineItemRequest)
         {
-            return View();
+            var addLineItemCommand = new AddLineItemCommand(new CartId(addLineItemRequest.CartId), new ProductId(addLineItemRequest.ProductId),
+                addLineItemRequest.Currency, addLineItemRequest.Amount);
+
+            await _mediator.Send(addLineItemCommand);
+
+            return Ok();
         }
 
-        // POST: CartController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        [HttpDelete("RemoveLineItemFromCart")]
+        public async Task<IActionResult> RemoveLineItemFromCart([FromBody] RemoveLineItemRequest removeLineItemRequest)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+            var removeLineItemCommand = new RemoveLineItemCommand(new CartId(removeLineItemRequest.CartId), new LineItemId(removeLineItemRequest.LineItemId));
 
-        // GET: CartController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
+            await _mediator.Send(removeLineItemCommand);
 
-        // POST: CartController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: CartController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: CartController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            return Ok();
         }
     }
 }

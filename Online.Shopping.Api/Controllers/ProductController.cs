@@ -25,7 +25,7 @@ namespace Online.Shopping.Api.Controllers
         }
 
         [HttpGet("GetProduct")]
-        public async Task<IActionResult> GetProduct(int id)
+        public async Task<IActionResult> GetProduct(Guid id)
         {
             var getProductQueryById = new GetProductQueryById(new ProductId(id));
 
@@ -47,8 +47,7 @@ namespace Online.Shopping.Api.Controllers
         [HttpPost("CreateProduct")]
         public async Task<IActionResult> CreateProduct([FromBody] CreateProductRequest createProductRequest)
         {
-            var createProductCommmand = new CreateProductCommand(new ProductId(createProductRequest.ProductId),
-                createProductRequest.Name, createProductRequest.Price, createProductRequest.Sku);
+            var createProductCommmand = new CreateProductCommand(createProductRequest.Name, createProductRequest.Price, createProductRequest.Sku);
 
             await _mediator.Send(createProductCommmand);
 
@@ -67,7 +66,7 @@ namespace Online.Shopping.Api.Controllers
         }
 
         [HttpDelete("DeleteProduct")]
-        public async Task<IActionResult> DeleteProduct(int id)
+        public async Task<IActionResult> DeleteProduct(Guid id)
         {
             var deleteCommand = new DeleteProductCommand(new ProductId(id));
 

@@ -16,4 +16,8 @@
     <ProjectReference Include="..\Online.Shopping.Application\Online.Shopping.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\" />
+  </ItemGroup>
+
 </Project>

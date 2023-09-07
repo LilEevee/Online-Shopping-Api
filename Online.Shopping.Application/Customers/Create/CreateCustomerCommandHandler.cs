@@ -16,7 +16,7 @@ namespace Online.Shopping.Application.Customers.Create
 
         public async Task Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
         {
-            var customer = new Customer(request.customerId, request.Email, request.Name);
+            var customer = new Customer(new CustomerId(Guid.NewGuid()), request.Email, request.Name);
 
             _customerRepository.Add(customer);
 

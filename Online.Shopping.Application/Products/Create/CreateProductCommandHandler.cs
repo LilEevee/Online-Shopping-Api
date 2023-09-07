@@ -17,7 +17,7 @@ namespace Online.Shopping.Application.Products.Create
 
         public async Task Handle(CreateProductCommand request, CancellationToken cancellationToken)
         {
-            var product = new Product(request.ProductId, request.Name, request.Price, request.Sku);
+            var product = new Product(new ProductId(Guid.NewGuid()), request.Name, request.Price, request.Sku);
 
             _productRepository.Add(product);
 
