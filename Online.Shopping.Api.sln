@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Online.Shopping.Api", "Onli
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{DC6E5176-5C50-43EB-B4A2-2BA34AACF0BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Online.Shopping.Tests", "..\Online.Shopping.Tests\Online.Shopping.Tests.csproj", "{56F59768-9EB0-4E57-A7E7-AAE24BF46FBD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Online.Shopping.Tests", "Online.Shopping.Tests\Online.Shopping.Tests.csproj", "{DE2FD97F-47D8-468F-A2B0-F297203ACA4E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,10 +51,10 @@ Global
 		{DC6E5176-5C50-43EB-B4A2-2BA34AACF0BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC6E5176-5C50-43EB-B4A2-2BA34AACF0BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC6E5176-5C50-43EB-B4A2-2BA34AACF0BC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{56F59768-9EB0-4E57-A7E7-AAE24BF46FBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{56F59768-9EB0-4E57-A7E7-AAE24BF46FBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{56F59768-9EB0-4E57-A7E7-AAE24BF46FBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{56F59768-9EB0-4E57-A7E7-AAE24BF46FBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE2FD97F-47D8-468F-A2B0-F297203ACA4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE2FD97F-47D8-468F-A2B0-F297203ACA4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE2FD97F-47D8-468F-A2B0-F297203ACA4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE2FD97F-47D8-468F-A2B0-F297203ACA4E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -65,7 +65,7 @@ Global
 		{A195FAAC-A617-4AEC-84B4-08407EDE4A7F} = {615C6B56-856E-4E20-9F9E-52376A118854}
 		{28DF5D90-C9AA-416D-A012-2B651257E707} = {615C6B56-856E-4E20-9F9E-52376A118854}
 		{681A51D7-AF3D-46CA-8100-4109E62F5FBF} = {615C6B56-856E-4E20-9F9E-52376A118854}
-		{56F59768-9EB0-4E57-A7E7-AAE24BF46FBD} = {36982C5A-15A3-4D4D-A15E-D4E55B5AA6C7}
+		{DE2FD97F-47D8-468F-A2B0-F297203ACA4E} = {36982C5A-15A3-4D4D-A15E-D4E55B5AA6C7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B09B9C10-EEC0-42E9-AB62-F2ED26CCC516}
