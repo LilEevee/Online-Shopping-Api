@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Online-Shopping-Api\Online.Shopping.Api\Online.Shopping.Api.csproj" />
+    <ProjectReference Include="..\Online.Shopping.Api\Online.Shopping.Api.csproj" />
   </ItemGroup>
 
 </Project>
