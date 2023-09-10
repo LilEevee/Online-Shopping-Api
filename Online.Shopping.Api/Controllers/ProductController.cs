@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Online.Shopping.Application.Products.Create;
 using Online.Shopping.Application.Products.Delete;
@@ -20,6 +21,7 @@ namespace Online.Shopping.Api.Controllers
             _mediator = mediator;
         }
 
+        [Authorize]
         [HttpGet("GetProduct")]
         public async Task<IActionResult> GetProduct(Guid id)
         {
@@ -30,6 +32,7 @@ namespace Online.Shopping.Api.Controllers
             return Ok(product);
         }
 
+        [Authorize]
         [HttpGet("GetProducts")]
         public async Task<IActionResult> GetProducts(string name, int page, int pageSize)
         {
@@ -40,6 +43,7 @@ namespace Online.Shopping.Api.Controllers
             return Ok(products);
         }
 
+        [Authorize]
         [HttpPost("CreateProduct")]
         public async Task<IActionResult> CreateProduct([FromBody] CreateProductRequest createProductRequest)
         {
@@ -51,6 +55,7 @@ namespace Online.Shopping.Api.Controllers
             return Ok(createProductResponse);
         }
 
+        [Authorize]
         [HttpPut("UpdateProduct")]
         public async Task<IActionResult> UpdateProduct([FromBody] UpdateProductRequest updateProductRequest)
         {
@@ -62,6 +67,7 @@ namespace Online.Shopping.Api.Controllers
             return Ok(updateProductResponse);
         }
 
+        [Authorize]
         [HttpDelete("DeleteProduct")]
         public async Task<IActionResult> DeleteProduct(Guid id)
         {

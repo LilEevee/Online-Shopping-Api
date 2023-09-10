@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Online.Shopping.Application.Carts.AddLineItem;
 using Online.Shopping.Application.Carts.Create;
@@ -20,6 +21,7 @@ namespace Online.Shopping.Api.Controllers
             _mediator = mediator;
         }
 
+        [Authorize]
         [HttpPost("CreateCart")]
         public async Task<IActionResult> CreateCart(Guid customerId)
         {
@@ -30,6 +32,7 @@ namespace Online.Shopping.Api.Controllers
             return Ok(createCartResponse);
         }
 
+        [Authorize]
         [HttpGet("GetCart")]
         public async Task<IActionResult> GetCart(Guid cartId)
         {
@@ -40,6 +43,7 @@ namespace Online.Shopping.Api.Controllers
             return Ok(getCartResponse);
         }
 
+        [Authorize]
         [HttpPut("AddLineItemToCart")]
         public async Task<IActionResult> AddLineItemToCart([FromBody] AddLineItemRequest addLineItemRequest)
         {
@@ -51,6 +55,7 @@ namespace Online.Shopping.Api.Controllers
             return Ok(addLineItemResponse);
         }
 
+        [Authorize]
         [HttpDelete("RemoveLineItemFromCart")]
         public async Task<IActionResult> RemoveLineItemFromCart([FromBody] RemoveLineItemRequest removeLineItemRequest)
         {
