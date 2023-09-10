@@ -18,7 +18,7 @@ namespace Online.Shopping.Tests
         public async Task CreateProduct_ShouldReturnProductId_IfSuccessful()
         {
             // Given
-            var createProductCommand = new CreateProductCommand("Poolbrite Month Mate Floater", "Bad at cleaning the pool", "$", 10m, 5);
+            var createProductCommand = new CreateProductCommand("Poolbrite Month Mate Floater", "Bad at cleaning the pool", "$", 10m, 5, new byte[3]);
 
             // When
             var createProductResponse = await Sender.Send(createProductCommand);
@@ -32,7 +32,7 @@ namespace Online.Shopping.Tests
         public async Task GetProductById_ShouldReturnProduct_IfSuccessful()
         {
             // Given
-            var createProductCommand = new CreateProductCommand("Blu52 Big Easy Multi Functional Floater", "Probably the best that there is", "$", 200m, 10);
+            var createProductCommand = new CreateProductCommand("Blu52 Big Easy Multi Functional Floater", "Probably the best that there is", "$", 200m, 10, new byte[3]);
             var createProductResponse = await Sender.Send(createProductCommand);
             var getProductByIdCommand = new GetProductQueryById(new ProductId(createProductResponse.ProductId));
 
@@ -50,21 +50,21 @@ namespace Online.Shopping.Tests
             var pageSize = 5;
             // Given - We seed some records into the table
             #region there be nasy things here :(
-            await Sender.Send(new CreateProductCommand("Poolbrite Month Mate Floater", "Bad at cleaning the pool", "$", 10m, 5));
-            await Sender.Send(new CreateProductCommand("Poolbrite Month Mate Floater", "Bad at cleaning the pool", "$", 10m, 5));
-            await Sender.Send(new CreateProductCommand("Poolbrite Month Mate Floater", "Bad at cleaning the pool", "$", 10m, 5));
-            await Sender.Send(new CreateProductCommand("Poolbrite Month Mate Floater", "Bad at cleaning the pool", "$", 10m, 5));
-            await Sender.Send(new CreateProductCommand("Poolbrite Month Mate Floater", "Bad at cleaning the pool", "$", 10m, 5));
-            await Sender.Send(new CreateProductCommand("Poolbrite Month Mate Floater", "Bad at cleaning the pool", "$", 10m, 5));
-            await Sender.Send(new CreateProductCommand("Poolbrite Month Mate Floater", "Bad at cleaning the pool", "$", 10m, 5));
-            await Sender.Send(new CreateProductCommand("Poolbrite Month Mate Floater", "Bad at cleaning the pool", "$", 10m, 5));
-            await Sender.Send(new CreateProductCommand("Poolbrite Month Mate Floater", "Bad at cleaning the pool", "$", 10m, 5));
-            await Sender.Send(new CreateProductCommand("Poolbrite Month Mate Floater", "Bad at cleaning the pool", "$", 10m, 5));
-            await Sender.Send(new CreateProductCommand("Poolbrite Month Mate Floater", "Bad at cleaning the pool", "$", 10m, 5));
-            await Sender.Send(new CreateProductCommand("Poolbrite Month Mate Floater", "Bad at cleaning the pool", "$", 10m, 5));
-            await Sender.Send(new CreateProductCommand("Poolbrite Month Mate Floater", "Bad at cleaning the pool", "$", 10m, 5));
-            await Sender.Send(new CreateProductCommand("Poolbrite Month Mate Floater", "Bad at cleaning the pool", "$", 10m, 5));
-            await Sender.Send(new CreateProductCommand("Poolbrite Month Mate Floater", "Bad at cleaning the pool", "$", 10m, 5));
+            await Sender.Send(new CreateProductCommand("Poolbrite Month Mate Floater", "Bad at cleaning the pool", "$", 10m, 5, new byte[3]));
+            await Sender.Send(new CreateProductCommand("Poolbrite Month Mate Floater", "Bad at cleaning the pool", "$", 10m, 5, new byte[3]));
+            await Sender.Send(new CreateProductCommand("Poolbrite Month Mate Floater", "Bad at cleaning the pool", "$", 10m, 5, new byte[3]));
+            await Sender.Send(new CreateProductCommand("Poolbrite Month Mate Floater", "Bad at cleaning the pool", "$", 10m, 5, new byte[3]));
+            await Sender.Send(new CreateProductCommand("Poolbrite Month Mate Floater", "Bad at cleaning the pool", "$", 10m, 5, new byte[3]));
+            await Sender.Send(new CreateProductCommand("Poolbrite Month Mate Floater", "Bad at cleaning the pool", "$", 10m, 5, new byte[3]));
+            await Sender.Send(new CreateProductCommand("Poolbrite Month Mate Floater", "Bad at cleaning the pool", "$", 10m, 5, new byte[3]));
+            await Sender.Send(new CreateProductCommand("Poolbrite Month Mate Floater", "Bad at cleaning the pool", "$", 10m, 5, new byte[3]));
+            await Sender.Send(new CreateProductCommand("Poolbrite Month Mate Floater", "Bad at cleaning the pool", "$", 10m, 5, new byte[3]));
+            await Sender.Send(new CreateProductCommand("Poolbrite Month Mate Floater", "Bad at cleaning the pool", "$", 10m, 5, new byte[3]));
+            await Sender.Send(new CreateProductCommand("Poolbrite Month Mate Floater", "Bad at cleaning the pool", "$", 10m, 5, new byte[3]));
+            await Sender.Send(new CreateProductCommand("Poolbrite Month Mate Floater", "Bad at cleaning the pool", "$", 10m, 5, new byte[3]));
+            await Sender.Send(new CreateProductCommand("Poolbrite Month Mate Floater", "Bad at cleaning the pool", "$", 10m, 5, new byte[3]));
+            await Sender.Send(new CreateProductCommand("Poolbrite Month Mate Floater", "Bad at cleaning the pool", "$", 10m, 5, new byte[3]));
+            await Sender.Send(new CreateProductCommand("Poolbrite Month Mate Floater", "Bad at cleaning the pool", "$", 10m, 5, new byte[3]));
             #endregion
             var getProductQuery = new GetProductsQuery("pool", 1, pageSize);
 
@@ -81,10 +81,10 @@ namespace Online.Shopping.Tests
         public async Task UpdateProduct_ShouldReturnUpdatedProduct_IfSuccessful()
         {
             // Given - we create the product and set the update command
-            var createProductCommand = new CreateProductCommand("Poolbrite Month Mate Floater", "Bad at cleaning the pool", "$", 10m, 5);
+            var createProductCommand = new CreateProductCommand("Poolbrite Month Mate Floater", "Bad at cleaning the pool", "$", 10m, 5, new byte[3]);
             var createProductResponse = await Sender.Send(createProductCommand);
 
-            var updateProductCommand = new UpdateProductCommand(new ProductId(createProductResponse.ProductId), "Blu52 Big Easy Multi Functional Floater", "Probably the best that there is", "$", 200m, 10);
+            var updateProductCommand = new UpdateProductCommand(new ProductId(createProductResponse.ProductId), "Blu52 Big Easy Multi Functional Floater", "Probably the best that there is", "$", 200m, 10, new byte[3]);
 
             // When
             var updateProductResponse = await Sender.Send(updateProductCommand);
@@ -103,7 +103,7 @@ namespace Online.Shopping.Tests
         public async Task DeleteProduct_ShouldReturnProductId_IfSuccessful()
         {
             // Given
-            var createProductCommand = new CreateProductCommand("Hth Floater", "looks coolish", "$", 150m, 10);
+            var createProductCommand = new CreateProductCommand("Hth Floater", "looks coolish", "$", 150m, 10, new byte[3]);
             var createProductResponse = await Sender.Send(createProductCommand);
 
             var deleteProductCommand = new DeleteProductCommand(new ProductId(createProductResponse.ProductId));
@@ -137,7 +137,7 @@ namespace Online.Shopping.Tests
         public async Task UpdateProductThatDoesNotExist_ShouldFailWithProductNotFoundException_IfSuccessful()
         {
             // Given
-            var updateProductCommand = new UpdateProductCommand(new ProductId(Guid.NewGuid()), "Blu52 Big Easy Multi Functional Floater", "Probably the best that there is", "$", 200m, 10);
+            var updateProductCommand = new UpdateProductCommand(new ProductId(Guid.NewGuid()), "Blu52 Big Easy Multi Functional Floater", "Probably the best that there is", "$", 200m, 10, new byte[3]);
 
             // When
             Task Action() => Sender.Send(updateProductCommand);

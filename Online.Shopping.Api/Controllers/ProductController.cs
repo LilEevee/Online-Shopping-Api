@@ -48,7 +48,7 @@ namespace Online.Shopping.Api.Controllers
         public async Task<IActionResult> CreateProduct([FromBody] CreateProductRequest createProductRequest)
         {
             var createProductCommmand = new CreateProductCommand(createProductRequest.Name, createProductRequest.Description,
-                createProductRequest.Currency,createProductRequest.Price, createProductRequest.Sku);
+                createProductRequest.Currency,createProductRequest.Price, createProductRequest.Sku, createProductRequest.Image);
 
             var createProductResponse = await _mediator.Send(createProductCommmand);
 
@@ -60,7 +60,7 @@ namespace Online.Shopping.Api.Controllers
         public async Task<IActionResult> UpdateProduct([FromBody] UpdateProductRequest updateProductRequest)
         {
             var updateProductCommand = new UpdateProductCommand(new ProductId(updateProductRequest.ProductId),
-                updateProductRequest.Name, updateProductRequest.Description, updateProductRequest.Currency, updateProductRequest.Price, updateProductRequest.Sku);
+                updateProductRequest.Name, updateProductRequest.Description, updateProductRequest.Currency, updateProductRequest.Price, updateProductRequest.Sku, updateProductRequest.Image);
             
             var updateProductResponse = await _mediator.Send(updateProductCommand);
 

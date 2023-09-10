@@ -42,7 +42,7 @@ namespace Online.Shopping.Tests
             // Given - a cart, user, product
             var createCustomerResponse = await Sender.Send(new CreateCustomerCommand("Evert", "Botha", "@.@.com"));
             var createCartResponse = await Sender.Send(new CreateCartCommand(createCustomerResponse.CustomerId));
-            var createProductResponse = await Sender.Send(new CreateProductCommand("Poolbrite Month Mate Floater", "Bad at cleaning the pool", "$", 10m, 5));
+            var createProductResponse = await Sender.Send(new CreateProductCommand("Poolbrite Month Mate Floater", "Bad at cleaning the pool", "$", 10m, 5, new byte[3]));
             var addLineItemCommand = new AddLineItemCommand(new CartId(createCartResponse.CartId), new ProductId(createProductResponse.ProductId), 5);
 
             // When
@@ -60,8 +60,8 @@ namespace Online.Shopping.Tests
             var createCustomerResponse = await Sender.Send(new CreateCustomerCommand("Evert", "Botha", "@.@.com"));
             var createCartResponse = await Sender.Send(new CreateCartCommand(createCustomerResponse.CustomerId));
             // creating products
-            var createProductResponseOne = await Sender.Send(new CreateProductCommand("Poolbrite Month Mate Floater", "Bad at cleaning the pool", "$", 10m, 5));
-            var createProductResponseTwo = await Sender.Send(new CreateProductCommand("Blu52 Big Easy Multi Functional Floater", "Probably the best that there is", "$", 200m, 10));
+            var createProductResponseOne = await Sender.Send(new CreateProductCommand("Poolbrite Month Mate Floater", "Bad at cleaning the pool", "$", 10m, 5, new byte[3]));
+            var createProductResponseTwo = await Sender.Send(new CreateProductCommand("Blu52 Big Easy Multi Functional Floater", "Probably the best that there is", "$", 200m, 10, new byte[3]));
             // adding line items
             var addLineItemCommandOne = new AddLineItemCommand(new CartId(createCartResponse.CartId), new ProductId(createProductResponseOne.ProductId), 5);
             var addlineItemResult = await Sender.Send(addLineItemCommandOne);
@@ -89,7 +89,7 @@ namespace Online.Shopping.Tests
             var createCustomerResponse = await Sender.Send(new CreateCustomerCommand("Evert", "Botha", "@.@.com"));
             var createCartResponse = await Sender.Send(new CreateCartCommand(createCustomerResponse.CustomerId));
             // creating product
-            var createProductResponse = await Sender.Send(new CreateProductCommand("Poolbrite Month Mate Floater", "Bad at cleaning the pool", "$", 10m, 5));
+            var createProductResponse = await Sender.Send(new CreateProductCommand("Poolbrite Month Mate Floater", "Bad at cleaning the pool", "$", 10m, 5, new byte[3]));
             // adding line items
             var addLineItemCommand = new AddLineItemCommand(new CartId(createCartResponse.CartId), new ProductId(createProductResponse.ProductId), 5);
             var addlineItemResult = await Sender.Send(addLineItemCommand);

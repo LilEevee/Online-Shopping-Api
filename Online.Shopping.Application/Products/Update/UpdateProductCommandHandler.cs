@@ -23,13 +23,13 @@ namespace Online.Shopping.Application.Products.Update
             if (product == null)
                 throw new ProductNotFoundException(updateProductCommand.ProductId);
 
-            product.Update(updateProductCommand.Name, updateProductCommand.Description, new Price( updateProductCommand.Currency, updateProductCommand.Price), updateProductCommand.Sku);
+            product.Update(updateProductCommand.Name, updateProductCommand.Description, new Price( updateProductCommand.Currency, updateProductCommand.Price), updateProductCommand.Sku, updateProductCommand.Image);
 
             _productRepository.Update(product);
 
             await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-            return new UpdateProductResponse(product.Id.Value, product.Name, product.Description, product.Price.Currency, product.Price.Amount, product.Sku);
+            return new UpdateProductResponse(product.Id.Value, product.Name, product.Description, product.Price.Currency, product.Price.Amount, product.Sku, product.Image);
         }
     }
 }
