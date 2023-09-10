@@ -1,15 +1,16 @@
 ﻿using Online.Shopping.Domain.Products;
+using Online.Shopping.Domain.Shared;
 
 namespace Online.Shopping.Domain.Carts
 {
     public class LineItem
     {
-        internal LineItem(LineItemId lineItemId, CartId cartId, ProductId productId, Price price)
+        internal LineItem(LineItemId lineItemId, CartId cartId, ProductId productId, int price)
         {
             LineItemId = lineItemId;
             CartId = cartId;
             ProductId = productId;
-            Price = price;
+            Quantity = price;
         }
 
         private LineItem()
@@ -22,6 +23,6 @@ namespace Online.Shopping.Domain.Carts
 
         public ProductId ProductId { get; private set; }
 
-        public Price Price { get; private set; }
+        public int Quantity { get; private set; }
     }
 }

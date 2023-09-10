@@ -1,0 +1,18 @@
+version: '3.4'
+
+services:
+  online.shopping.api:
+    image: ${DOCKER_REGISTRY-}onlineshoppingapi
+    build:
+      context: .
+      dockerfile: Online.Shopping.Api/Dockerfile
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      SA_PASSWORD: P4ssw0rd123456789
+      ACCEPT_EULA: Y
+    ports:
+      - "1433:1433"
+    volumes:
+      - ./data:/var/opt/mssql/data
+

@@ -1,10 +1,11 @@
 ﻿using MediatR;
 using Online.Shopping.Application.Abstractions.Data;
+using Online.Shopping.Application.Products.Update;
 using Online.Shopping.Domain.Products;
 
 namespace Online.Shopping.Application.Products.Delete
 {
-    internal sealed class DeleteProductCommandHandler : IRequestHandler<DeleteProductCommand>
+    internal sealed class DeleteProductCommandHandler : IRequestHandler<DeleteProductCommand, DeleteProductResponse>
     {
         private readonly IProductRepository _productRepository;
         private readonly IUnitOfWork _unitOfWork;
@@ -15,19 +16,18 @@ namespace Online.Shopping.Application.Products.Delete
             _unitOfWork = unitOfWork;
         }
 
-        public async Task Handle(DeleteProductCommand request, CancellationToken cancellationToken)
+        public async Task<DeleteProductResponse> Handle(DeleteProductCommand deleteProductCommand, CancellationToken cancellationToken)
         {
-            var product = await _productRepository.GetByIdAsync(request.ProductId);
+            var product = await _productRepository.GetByIdAsync(deleteProductCommand.ProductId);
 
-            if(product == null)
-            {
-                // TODO: ADD EXCEPTION HANDLING
-                throw new ArgumentException();
-            }
+            if (product == null)
+                throw new ProductNotFoundException(deleteProductCommand.ProductId);
 
             _productRepository.Remove(product);
 
             await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+            return new DeleteProductResponse(product.Id.Value, product.Name, product.Description, product.Price.Currency, product.Price.Amount, product.Sku);
         }
     }
 }

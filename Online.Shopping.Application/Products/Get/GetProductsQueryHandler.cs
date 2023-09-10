@@ -25,7 +25,7 @@ namespace Online.Shopping.Application.Products.Get
             }
 
             var productResponsesQuery = productsQuery
-                        .Select(p => new ProductResponse(p.Id, p.Name, p.Price, p.Sku));
+                        .Select(p => new ProductResponse(p.Id, p.Name, p.Price.Currency, p.Price.Amount, p.Sku));
 
             var products = await PagedList<ProductResponse>.CreateAsync(productResponsesQuery, request.Page, request.PageSize);
 

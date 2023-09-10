@@ -5,10 +5,10 @@ using Online.Shopping.Domain.Products;
 
 namespace Online.Shopping.Application.Products.Get
 {
-    internal sealed class GetProductsQueryByIdHandler : IRequestHandler<GetProductQueryById, ProductResponse>
+    internal sealed class GetProductQueryByIdHandler : IRequestHandler<GetProductQueryById, ProductResponse>
     {
         private readonly IOnlineShoppingDbContext _onlineShoppingDbContext;
-        public GetProductsQueryByIdHandler(IOnlineShoppingDbContext onlineShoppingDbContext)
+        public GetProductQueryByIdHandler(IOnlineShoppingDbContext onlineShoppingDbContext)
         {
             _onlineShoppingDbContext = onlineShoppingDbContext;
         }
@@ -17,14 +17,11 @@ namespace Online.Shopping.Application.Products.Get
             var product = await _onlineShoppingDbContext
                 .Products
                 .Where(p => p.Id == request.ProductId)
-                .Select(p => new ProductResponse(p.Id, p.Name, p.Price, p.Sku))
+                .Select(p => new ProductResponse(p.Id, p.Name, p.Price.Currency, p.Price.Amount, p.Sku))
                 .FirstOrDefaultAsync(cancellationToken);
 
             if (product is null)
-            {
-                // TODO: ADD EXCEPTION HANDLING
-                throw new ArgumentException();
-            }
+                throw new ProductNotFoundException(request.ProductId);
 
             return product;
         }

@@ -13,7 +13,7 @@ namespace Online.Shopping.Persistence
         private readonly IPublisher _publisher;
 
         public OnlineShoppingDbContext(DbContextOptions dbContextOptions, IPublisher publisher)
-    :       base(dbContextOptions)
+    : base(dbContextOptions)
         {
             _publisher = publisher;
         }
@@ -30,31 +30,25 @@ namespace Online.Shopping.Persistence
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
-            try
-            {
-                var domainEvents = ChangeTracker.Entries<IEntity>()
-                    .Select(e => e.Entity)
-                    .Where(e => e.GetDomainEvents().Any())
-                    .SelectMany(e =>
-                    {
-                        var domainEvents = e.GetDomainEvents();
-                        e.ClearDomainEvents();
-                        return domainEvents;
-                    }).ToList();
 
-                var result = await base.SaveChangesAsync(cancellationToken);
-
-                foreach (var domainEvent in domainEvents)
+            var domainEvents = ChangeTracker.Entries<IEntity>()
+                .Select(e => e.Entity)
+                .Where(e => e.GetDomainEvents().Any())
+                .SelectMany(e =>
                 {
-                    await _publisher.Publish(domainEvent, cancellationToken);
-                }
-            }
-            catch (Exception exc)
+                    var domainEvents = e.GetDomainEvents();
+                    e.ClearDomainEvents();
+                    return domainEvents;
+                }).ToList();
+
+            var result = await base.SaveChangesAsync(cancellationToken);
+
+            foreach (var domainEvent in domainEvents)
             {
-
+                await _publisher.Publish(domainEvent, cancellationToken);
             }
 
-            return 1;
+            return result;
         }
     }
 }

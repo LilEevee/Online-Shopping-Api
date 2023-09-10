@@ -1,4 +1,4 @@
 ﻿namespace Online.Shopping.Domain.Carts
 {
-    public record CartId(Guid Id);
+    public record CartId(Guid Value);
 }

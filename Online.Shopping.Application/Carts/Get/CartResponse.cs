@@ -1,3 +1,3 @@
 ﻿namespace Online.Shopping.Application.Carts.Get;
 
-public record CartResponse(Guid Id, Guid CustomerId, List<LineItemResponse> LineItems);
+public record CartResponse(Guid CartId, Guid CustomerId, List<LineItemResponse> LineItems);

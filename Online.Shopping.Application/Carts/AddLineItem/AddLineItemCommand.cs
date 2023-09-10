@@ -4,6 +4,8 @@ using Online.Shopping.Domain.Products;
 
 namespace Online.Shopping.Application.Carts.AddLineItem;
 
-public record AddLineItemCommand(CartId CartId, ProductId ProductId, string Currency, decimal Amount) : IRequest;
+public record AddLineItemCommand(CartId CartId, ProductId ProductId, int Quantity) : IRequest<AddLineItemResponse>;
 
-public record AddLineItemRequest(Guid CartId, Guid ProductId, string Currency, decimal Amount);
+public record AddLineItemRequest(Guid CartId, Guid ProductId, int Quantity);
+
+public record AddLineItemResponse(IReadOnlyList<LineItem> LineItemId);

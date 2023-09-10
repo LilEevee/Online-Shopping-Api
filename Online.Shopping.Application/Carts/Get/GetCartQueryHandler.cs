@@ -18,21 +18,18 @@ internal sealed class GetCartQueryHandler : IRequestHandler<GetCartQuery, CartRe
     {
         var cartId = new CartId(request.CartId);
 
-        var cartResponse = await _onlineShoppingDbContext
-            .Carts
+        var cartResponse = await _onlineShoppingDbContext.Carts
             .Where(o => o.Id == cartId)
             .Select(o => new CartResponse(
-                o.Id.Id,
-                o.CustomerId.Id,
+                o.Id.Value,
+                o.CustomerId.Value,
                 o.LineItems
-                    .Select(li => new LineItemResponse(li.LineItemId.Id, li.Price.Amount))
+                    .Select(li => new LineItemResponse(li.LineItemId.Id, li.Quantity))
                     .ToList()))
             .FirstOrDefaultAsync(cancellationToken);
 
         if (cartResponse is null)
-        {
-            throw new Exception();
-        }
+            throw new CartNotFoundException(cartId);
 
         return cartResponse;
     }

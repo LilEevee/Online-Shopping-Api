@@ -2,10 +2,11 @@
 using Online.Shopping.Application.Abstractions.Data;
 using Online.Shopping.Domain.Carts;
 using Online.Shopping.Domain.Products;
+using Online.Shopping.Domain.Shared;
 
 namespace Online.Shopping.Application.Carts.AddLineItem;
 
-internal sealed class AddLineItemCommandHandler : IRequestHandler<AddLineItemCommand>
+internal sealed class AddLineItemCommandHandler : IRequestHandler<AddLineItemCommand, AddLineItemResponse>
 {
     private readonly ICartRepository _cartRepository;
     private readonly IProductRepository _productRepository;
@@ -21,26 +22,22 @@ internal sealed class AddLineItemCommandHandler : IRequestHandler<AddLineItemCom
         _unitOfWork = unitOfWork;
     }
 
-    public async Task Handle(AddLineItemCommand request, CancellationToken cancellationToken)
+    public async Task<AddLineItemResponse> Handle(AddLineItemCommand addLineItemCommand, CancellationToken cancellationToken)
     {
-        var cart = await _cartRepository.GetByIdAsync(request.CartId);
+        var cart = await _cartRepository.GetByIdAsync(addLineItemCommand.CartId);
 
         if (cart is null)
-        {
-            // throw new CartNotFoundException(request.CartId);
-            throw new Exception();
-        }
+             throw new CartNotFoundException(addLineItemCommand.CartId);
 
-        var product = await _productRepository.GetByIdAsync(request.ProductId);
+        var product = await _productRepository.GetByIdAsync(addLineItemCommand.ProductId);
 
         if (product is null)
-        {
-            throw new Exception();
-            // throw new ProductNotFoundException(request.ProductId);
-        }
+           throw new ProductNotFoundException(addLineItemCommand.ProductId);
 
-        cart.AddLineItem(product.Id, new Price(request.Currency, request.Amount));
+        cart.AddLineItem(product.Id, addLineItemCommand.Quantity);
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+        return new AddLineItemResponse(cart.LineItems);
     }
 }

@@ -1,3 +1,5 @@
-﻿namespace Online.Shopping.Application.Carts.Get;
+﻿using Online.Shopping.Domain.Products;
 
-public record LineItemResponse(Guid LineItemId, decimal Price);
+namespace Online.Shopping.Application.Carts.Get;
+
+public record LineItemResponse(Guid LineItemId, decimal Quantity);

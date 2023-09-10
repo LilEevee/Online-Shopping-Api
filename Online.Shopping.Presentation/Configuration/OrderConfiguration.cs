@@ -12,7 +12,7 @@ internal class CartConfiguration : IEntityTypeConfiguration<Cart>
         builder.HasKey(o => o.Id);
 
         builder.Property(o => o.Id).HasConversion(
-            cart => cart.Id,
+            cart => cart.Value,
             value => new CartId(value));
 
         builder.HasOne<Customer>()

@@ -4,7 +4,7 @@ using Online.Shopping.Domain.Customers;
 
 namespace Online.Shopping.Application.Customers.Create
 {
-    internal sealed class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerCommand>
+    internal sealed class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerCommand, CreateCustomerResponse>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ICustomerRepository _customerRepository;
@@ -14,13 +14,15 @@ namespace Online.Shopping.Application.Customers.Create
             _unitOfWork = unitOfWork;
         }
 
-        public async Task Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
+        public async Task<CreateCustomerResponse> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
         {
             var customer = new Customer(new CustomerId(Guid.NewGuid()), request.Email, request.Name);
 
             _customerRepository.Add(customer);
 
-            await _unitOfWork.SaveChangesAsync(cancellationToken); 
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+            return new CreateCustomerResponse(customer.Id.Value);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Online.Shopping.Domain.Customers;
 using Online.Shopping.Domain.Products;
+using Online.Shopping.Domain.Shared;
 
 namespace Online.Shopping.Domain.Carts
 {
@@ -25,13 +26,13 @@ namespace Online.Shopping.Domain.Carts
             return cart;
         }
 
-        public void AddLineItem(ProductId productId, Price price)
+        public void AddLineItem(ProductId productId, int quantity)
         {
             var lineItem = new LineItem(
                 new LineItemId(Guid.NewGuid()),
                 Id,
                 productId,
-                price);
+                quantity);
 
             _lineItems.Add(lineItem);
 

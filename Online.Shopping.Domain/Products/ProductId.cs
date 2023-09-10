@@ -1,4 +1,4 @@
 ﻿namespace Online.Shopping.Domain.Products
 {
-    public record ProductId(Guid Id);
+    public record ProductId(Guid Value);
 }

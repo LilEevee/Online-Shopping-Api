@@ -6,7 +6,7 @@ using Online.Shopping.Domain.Customers;
 
 namespace Online.Shopping.Application.Carts.Create;
 
-internal sealed class CreateCartCommandHandler : IRequestHandler<CreateCartCommand>
+internal sealed class CreateCartCommandHandler : IRequestHandler<CreateCartCommand,CreateCartResponse>
 {
     private readonly ICustomerRepository _customerRepository;
     private readonly ICartRepository _cartRepository;
@@ -22,20 +22,20 @@ internal sealed class CreateCartCommandHandler : IRequestHandler<CreateCartComma
         _unitOfWork = unitOfWork;
     }
 
-    public async Task Handle(CreateCartCommand request, CancellationToken cancellationToken)
+    public async Task<CreateCartResponse> Handle(CreateCartCommand createCartCommand, CancellationToken cancellationToken)
     {
         var customer = await _customerRepository.GetByIdAsync(
-            new CustomerId(request.CustomerId));
+            new CustomerId(createCartCommand.CustomerId));
 
         if (customer is null)
-        {
-            return;
-        }
+            throw new CustomerNotFoundException(new CustomerId(createCartCommand.CustomerId));
 
         var cart = Cart.Create(customer.Id);
 
         _cartRepository.Add(cart);
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+        return new CreateCartResponse(cart.Id.Value);
     }
 }

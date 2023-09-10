@@ -1,4 +1,4 @@
 ﻿namespace Online.Shopping.Domain.Customers
 {
-    public record CustomerId (Guid Id);
+    public record CustomerId (Guid Value);
 }
