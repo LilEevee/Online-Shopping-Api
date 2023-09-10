@@ -20,21 +20,17 @@ namespace Online.Shopping.Api.Controllers
         public async Task<IActionResult> Get()
         {
             using var client = new HttpClient();
-            var tokenEndpoint = "https://dev-uo21vib8sunumd4o.us.auth0.com/oauth/token";
-            var clientId = "YHaEShO4CLernWd1OBTISBsajMiBlBZv";
-            var clientSecret = "5CzDo1swkB-xLKKEqms6T4zd-tNXGfDufpF1N5M-SxzVqz1amWm8FAyDZKjOsw9t";
-            var audience = "https://OnlineShopping/api";
-            var grantType = "client_credentials";
+
 
             var content = new FormUrlEncodedContent(new Dictionary<string, string>
                 {
-                    { "client_id", clientId },
-                    { "client_secret", clientSecret },
-                    { "audience", audience },
-                    { "grant_type", grantType }
+                    { "client_id", _configuration.GetSection("AuthSettings:ClientId").Value },
+                    { "client_secret",  _configuration.GetSection("AuthSettings:ClientSecret").Value },
+                    { "audience",  _configuration.GetSection("AuthSettings:Audience").Value },
+                    { "grant_type",  _configuration.GetSection("AuthSettings:GrantType").Value }
                 });
 
-            var response = await client.PostAsync(tokenEndpoint, content);
+            var response = await client.PostAsync(_configuration.GetSection("AuthSettings:TokenEndPoint").Value, content);
 
             if (response.IsSuccessStatusCode)
             {
@@ -46,15 +42,14 @@ namespace Online.Shopping.Api.Controllers
             }
             else
             {
-                return HttpStatusCode.InternalServerError
+                Response.StatusCode = StatusCodes.Status500InternalServerError;
+                return Content("Failed to get the auth token");
             }
         }
-
-        public class AuthorizationAccess
-        {
-            [JsonPropertyName("access_token")]
-            public string Token { get; set; }
-        }
-
+    }
+    internal sealed class AuthorizationAccess
+    {
+        [JsonPropertyName("access_token")]
+        public string Token { get; set; }
     }
 }

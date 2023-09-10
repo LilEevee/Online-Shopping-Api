@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Online.Shopping.Domain
+﻿namespace Online.Shopping.Domain
 {
     public abstract class Entity<EntityId> : IEntity
     {

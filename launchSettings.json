@@ -2,6 +2,14 @@
   "ConnectionStrings": {
     "Database": "Password=P4ssw0rd123456789;Persist Security Info=True;User ID=sa;Initial Catalog=OnlineShopping;Data Source=mssql;Encrypt=False"
   },
+  "AuthSettings": {
+    "TokenEndPoint": "https://dev-uo21vib8sunumd4o.us.auth0.com/oauth/token",
+    "ClientId": "YHaEShO4CLernWd1OBTISBsajMiBlBZv",
+    "ClientSecret": "5CzDo1swkB-xLKKEqms6T4zd-tNXGfDufpF1N5M-SxzVqz1amWm8FAyDZKjOsw9t",
+    "Authority": "https://dev-uo21vib8sunumd4o.us.auth0.com",
+    "Audience": "https://OnlineShopping/api",
+    "GrantType": "client_credentials"
+  },
   "profiles": {
     "Docker Compose": {
       "commandName": "DockerCompose",
