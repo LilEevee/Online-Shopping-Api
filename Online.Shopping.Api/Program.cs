@@ -5,7 +5,6 @@ using Online.Shopping.Api.Middleware;
 using Online.Shopping.Application;
 using Online.Shopping.Infrastructure;
 using Online.Shopping.Persistence;
-using Online.Shopping.Api.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
