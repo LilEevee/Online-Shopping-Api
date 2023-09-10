@@ -1,10 +1,11 @@
-using Online.Shopping.Application;
-using Online.Shopping.Persistence;
-using Online.Shopping.Infrastructure;
+using AspNetCoreRateLimit;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Online.Shopping.Api.Extensions;
 using Online.Shopping.Api.Middleware;
-using Microsoft.OpenApi.Models;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Online.Shopping.Application;
+using Online.Shopping.Infrastructure;
+using Online.Shopping.Persistence;
+using Online.Shopping.Api.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +17,6 @@ builder.Services.AddInfrastructure();
 builder.Services.AddPersistence(builder.Configuration);
 builder.Services.AddApplication();
 
-
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
      .AddJwtBearer(options =>
      {
@@ -24,7 +24,15 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
          options.Audience = builder.Configuration.GetSection("AuthSettings:Audience").Value;
      });
 
-builder.Services.AddSwaggerGen();
+builder.Services.AddAuthSwaggerGen();
+
+// IpRateLimiing
+builder.Services.Configure<IpRateLimitOptions>(builder.Configuration.GetSection("IpRateLimiting"));
+builder.Services.AddMemoryCache();
+builder.Services.AddSingleton<IRateLimitCounterStore, MemoryCacheRateLimitCounterStore>();
+builder.Services.AddSingleton<IIpPolicyStore, MemoryCacheIpPolicyStore>();
+builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
+builder.Services.AddSingleton<IProcessingStrategy, AsyncKeyLockProcessingStrategy>();
 
 var app = builder.Build();
 
@@ -41,9 +49,12 @@ if (app.Environment.IsDevelopment())
     app.ApplyMigrations();
 }
 
+app.UseIpRateLimiting();
 app.UseAuthentication();
 app.UseAuthorization();
+
 app.UseMiddleware<ExceptionHandlingMiddleware>();
+
 app.MapControllers();
 
 app.Run();

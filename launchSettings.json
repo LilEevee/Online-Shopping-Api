@@ -10,6 +10,20 @@
     "Audience": "https://OnlineShopping/api",
     "GrantType": "client_credentials"
   },
+  "IpRateLimiting": {
+    "EnableEndpointRateLimiting": true,
+    "StackBlockedRequests": true,
+    "RealIPHeader": "X-Real-IP",
+    "ClientIdHeader": "X-ClientId",
+    "HttpStatusCode": 429,
+    "GeneralRules": [
+      {
+        "Endpoint": "*",
+        "Period": "1s",
+        "Limit": 5
+      }
+    ]
+  },
   "profiles": {
     "Docker Compose": {
       "commandName": "DockerCompose",

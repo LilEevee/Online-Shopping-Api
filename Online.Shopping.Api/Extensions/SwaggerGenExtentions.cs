@@ -4,7 +4,7 @@ namespace Online.Shopping.Api.Extensions
 {
     public static class SwaggerGenExtentions
     {
-        public static IServiceCollection AddSwaggerGen(this IServiceCollection serviceCollection, IConfiguration configuration)
+        public static IServiceCollection AddAuthSwaggerGen(this IServiceCollection serviceCollection)
         {
             serviceCollection.AddSwaggerGen(c =>
             {
