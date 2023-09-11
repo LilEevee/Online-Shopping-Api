@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
 
-namespace Online.Shopping.Application.Products.Update
+namespace Online.Shopping.Application.Products.Create
 {
-    public sealed class UpdateProductCommandValidator : AbstractValidator<UpdateProductCommand>
+    public sealed class CreateProductCommandValidator : AbstractValidator<CreateProductCommand>
     {
-        public UpdateProductCommandValidator() 
+        public CreateProductCommandValidator() 
         {
             RuleFor(command => command.Name)
                 .NotEmpty().WithMessage("Please supply a product name");

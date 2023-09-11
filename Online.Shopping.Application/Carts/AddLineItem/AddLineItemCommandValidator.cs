@@ -6,7 +6,7 @@ namespace Online.Shopping.Application.Carts.AddLineItem
     {
         public AddLineCommandValidator() 
         { 
-            RuleFor(command => command.ProductId)
+            RuleFor(command => command.ProductId.Value)
                 .NotEmpty().WithMessage("ProductId is required");
 
             RuleFor(command => command.CartId)

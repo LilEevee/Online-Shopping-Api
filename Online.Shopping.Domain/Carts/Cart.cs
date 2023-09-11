@@ -41,11 +41,6 @@ namespace Online.Shopping.Domain.Carts
 
         public void RemoveLineItem(LineItemId lineItemId)
         {
-            if (HasOneLineItem())
-            {
-                return;
-            }
-
             var lineItem = _lineItems.FirstOrDefault(li => li.LineItemId == lineItemId);
 
             if (lineItem is null)
@@ -57,7 +52,5 @@ namespace Online.Shopping.Domain.Carts
 
             Raise(new LineItemRemovedDomainEvent(Guid.NewGuid(), Id, lineItem.LineItemId));
         }
-
-        private bool HasOneLineItem() => _lineItems.Count == 1;
     }
 }
