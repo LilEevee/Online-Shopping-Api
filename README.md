@@ -25,6 +25,8 @@ You should be able to run it locally with ease:
 4) Run "docker-compose up"
 5) It should pull everything you need and start the api.
 6) You should be able to hit the swagger by going to http://localhost:6969/swagger/index.html
+7) Note you need to authenticate before you can use any of the cart,customer or product calls.
+8) Use the auth call to get your token, click the authorize button and type "bearer {token that you received via the call}"
 
 If you wish to run it via Visual Studio:
 1) Clone the solution
