@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Online.Shopping.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class WeGoAgain : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -30,6 +30,8 @@ namespace Online.Shopping.Persistence.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Image = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     Price_Currency = table.Column<string>(type: "nvarchar(3)", maxLength: 3, nullable: false),
                     Price_Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Sku = table.Column<int>(type: "int", nullable: false)
@@ -64,8 +66,7 @@ namespace Online.Shopping.Persistence.Migrations
                     LineItemId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CartId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Price_Currency = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Price_Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    Quantity = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

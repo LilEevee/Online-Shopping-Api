@@ -1,0 +1,8 @@
+{
+  "name": "blue 52 floater",
+  "description": "works really nice",
+  "currency": "$",
+  "price": 10,
+  "sku": 2,
+  "image": "123141231231"
+}

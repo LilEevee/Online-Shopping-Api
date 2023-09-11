@@ -12,8 +12,8 @@ using Online.Shopping.Persistence;
 namespace Online.Shopping.Persistence.Migrations
 {
     [DbContext(typeof(OnlineShoppingDbContext))]
-    [Migration("20230910071914_WeGoAgain")]
-    partial class WeGoAgain
+    [Migration("20230911060502_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,6 +51,9 @@ namespace Online.Shopping.Persistence.Migrations
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
                     b.HasKey("LineItemId");
 
                     b.HasIndex("CartId");
@@ -82,6 +85,14 @@ namespace Online.Shopping.Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Image")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -117,34 +128,11 @@ namespace Online.Shopping.Persistence.Migrations
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.OwnsOne("Online.Shopping.Domain.Products.Price", "Price", b1 =>
-                        {
-                            b1.Property<Guid>("LineItemId")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<decimal>("Amount")
-                                .HasColumnType("decimal(18,2)");
-
-                            b1.Property<string>("Currency")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.HasKey("LineItemId");
-
-                            b1.ToTable("LineItems");
-
-                            b1.WithOwner()
-                                .HasForeignKey("LineItemId");
-                        });
-
-                    b.Navigation("Price")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Online.Shopping.Domain.Products.Product", b =>
                 {
-                    b.OwnsOne("Online.Shopping.Domain.Products.Price", "Price", b1 =>
+                    b.OwnsOne("Online.Shopping.Domain.Shared.Price", "Price", b1 =>
                         {
                             b1.Property<Guid>("ProductId")
                                 .HasColumnType("uniqueidentifier");
