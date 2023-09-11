@@ -1,11 +1,4 @@
-﻿using Online.Shopping.Domain.Products;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Online.Shopping.Domain.Carts
+﻿namespace Online.Shopping.Domain.Carts
 {
     public sealed class CartNotFoundException : Exception
     {

@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using Online.Shopping.Application.Carts.Create;
 
 namespace Online.Shopping.Application.Carts.Get
 {

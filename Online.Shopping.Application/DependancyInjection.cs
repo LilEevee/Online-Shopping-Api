@@ -1,7 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using FluentValidation;
+using Microsoft.Extensions.DependencyInjection;
 using Online.Shopping.Application.Abstractions;
 using Online.Shopping.Application.Customers.Create;
-using FluentValidation;
 
 namespace Online.Shopping.Application
 {

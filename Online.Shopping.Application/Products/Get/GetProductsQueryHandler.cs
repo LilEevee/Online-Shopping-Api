@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
 using Online.Shopping.Application.Abstractions.Data;
 using Online.Shopping.Domain.Products;
 

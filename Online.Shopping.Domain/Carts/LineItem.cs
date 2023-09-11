@@ -1,5 +1,4 @@
 ﻿using Online.Shopping.Domain.Products;
-using Online.Shopping.Domain.Shared;
 
 namespace Online.Shopping.Domain.Carts
 {

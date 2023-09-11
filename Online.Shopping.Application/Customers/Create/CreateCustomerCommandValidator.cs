@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using Online.Shopping.Domain.Customers;
 
 namespace Online.Shopping.Application.Customers.Create
 {

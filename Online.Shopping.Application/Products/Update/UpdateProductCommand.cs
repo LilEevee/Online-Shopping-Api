@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Online.Shopping.Domain.Products;
-using Online.Shopping.Domain.Shared;
 
 namespace Online.Shopping.Application.Products.Update
 {

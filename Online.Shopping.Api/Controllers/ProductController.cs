@@ -6,7 +6,6 @@ using Online.Shopping.Application.Products.Delete;
 using Online.Shopping.Application.Products.Get;
 using Online.Shopping.Application.Products.Update;
 using Online.Shopping.Domain.Products;
-using Online.Shopping.Domain.Shared;
 
 namespace Online.Shopping.Api.Controllers
 {

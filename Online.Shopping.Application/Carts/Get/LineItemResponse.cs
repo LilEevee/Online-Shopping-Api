@@ -1,5 +1,3 @@
-﻿using Online.Shopping.Domain.Products;
-
-namespace Online.Shopping.Application.Carts.Get;
+﻿namespace Online.Shopping.Application.Carts.Get;
 
 public record LineItemResponse(Guid LineItemId, decimal Quantity);

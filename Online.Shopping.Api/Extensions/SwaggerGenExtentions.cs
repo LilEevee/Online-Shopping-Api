@@ -10,7 +10,6 @@ namespace Online.Shopping.Api.Extensions
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "OnlineShoppingApi", Version = "v1" });
 
-                // Configure Swagger to use Auth0 JWT Bearer Authentication
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Description = "JWT Authorization header using the Bearer scheme",

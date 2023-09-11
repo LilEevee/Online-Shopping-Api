@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Online.Shopping.Application.Abstractions.Data;
-using Online.Shopping.Application.Products.Update;
 using Online.Shopping.Domain.Products;
 
 namespace Online.Shopping.Application.Products.Delete

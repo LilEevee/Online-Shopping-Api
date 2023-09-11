@@ -2,7 +2,6 @@
 using Online.Shopping.Application.Abstractions.Data;
 using Online.Shopping.Domain.Carts;
 using Online.Shopping.Domain.Products;
-using Online.Shopping.Domain.Shared;
 
 namespace Online.Shopping.Application.Carts.AddLineItem;
 
